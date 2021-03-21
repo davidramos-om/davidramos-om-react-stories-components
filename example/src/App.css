@@ -1,0 +1,164 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+p {
+	margin: 0;
+}
+
+.App {
+	margin: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Karla', sans-serif;
+	height: 87vh;
+}
+
+.stories {
+	filter: drop-shadow(0 10px 20px #aaa);
+}
+
+.left {
+	display: flex;
+	flex-direction: column;
+	margin-right: 10rem;
+	justify-content: flex-start;
+	max-width: 400px;
+}
+
+.seeMore {
+	padding: 2rem;
+	color: #16161d;
+	background: white;
+	height: -webkit-fill-available;
+}
+
+.seeMore input,
+.seeMore textarea {
+	display: block;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 0.8rem;
+	margin-bottom: 0.7rem;
+	width: -webkit-fill-available;
+	transition: filter 300ms ease-in-out;
+	font-size: 0.8rem;
+	font-family: inherit;
+}
+
+.seeMore input:focus,
+.seeMore textarea:focus {
+	outline: none;
+	filter: drop-shadow(0 2px 5px #ccc);
+}
+
+.seeMore button {
+	display: block;
+	margin: auto;
+	margin-top: 1rem;
+	background: #16161d;
+	filter: drop-shadow(0 3px 5px #ccc);
+	color: snow;
+	border-radius: 5px;
+	border: none;
+	width: 200px;
+	padding: 0.5rem;
+	font-size: 1rem;
+	transition: filter 300ms ease-in-out;
+}
+
+.seeMore button:focus {
+	outline: none;
+}
+
+.seeMore button:hover {
+	cursor: pointer;
+	filter: drop-shadow(0 5px 5px #aaa);
+}
+
+.seeMore a {
+	display: block;
+	font-size: 0.8rem;
+	width: fit-content;
+	margin: auto;
+	margin-top: 2rem;
+}
+
+code {
+	font-family: 'Source Code Pro', monospace;
+}
+
+.updates {
+	max-height: 30vh;
+	overflow: scroll;
+}
+
+.updates p {
+	margin: 2px;
+}
+
+@media only screen and (max-width: 768px) {
+	.App {
+		flex-direction: column;
+		justify-content: flex-start;
+		height: auto;
+	}
+
+	.left {
+		max-width: 100%;
+		margin: 0;
+		margin-bottom: 2rem;
+	}
+}
+
+.main{
+	width: 100%;
+  }
+ 
+  .button-one, .button-two, .button-three{
+	text-align: center;
+	cursor: pointer;
+	font-size:24px; 
+  }
+
+  .button-three {
+    position: relative;
+    background-color: #f39c12;
+    border: none;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.button-three:hover{
+   background:#fff;
+   box-shadow:0px 2px 10px 5px #97B1BF;
+   color:#000;
+}
+
+.button-three:after {
+    content: "";
+    background: #f1c40f;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.button-three:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}  
