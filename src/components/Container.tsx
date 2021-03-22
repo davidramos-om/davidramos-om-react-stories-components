@@ -97,6 +97,12 @@ export default function () {
 
         const story = stories[ currentId ];
 
+        if (!story.clickable)
+            return;
+
+        if (story?.onStoryClicked)
+            story.onStoryClicked(currentId, story, e.target);
+
         if (story?.stopOnClick) {
 
             if (pause) {
@@ -110,6 +116,17 @@ export default function () {
                 }, 200)
             }
         }
+
+    }
+
+    const handleContainerDebounce = (e: React.MouseEvent | React.TouchEvent) => {
+
+        const story = stories[ currentId ];
+
+        if (!story.clickable)
+            return;
+
+        debouncePause(e);
     }
 
     const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
@@ -138,8 +155,8 @@ export default function () {
         <div
             style={{ ...styles.container, ...{ width, height } }}
             onClick={handleContainerClick}
-            onTouchStart={debouncePause}
-            onMouseDown={debouncePause}
+            onTouchStart={handleContainerDebounce}
+            onMouseDown={handleContainerDebounce}
         >
             <ProgressContext.Provider value={{
                 bufferAction: bufferAction,

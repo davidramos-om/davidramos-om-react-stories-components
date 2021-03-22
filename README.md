@@ -4,7 +4,7 @@
 
 <p align="center">
 <a href="https://davidramos-om.github.io/react-stories-components/">
-	Homepage
+	Demo Homepage
 </p>
 
 <div align="center">
@@ -33,7 +33,7 @@ Please keep updated on the original one.
 This one will online until [mohitk05's repo](https://github.com/mohitk05/react-stories-components) accomplishing this functionality.
  
 
-<img height="600" src="https://i.imgur.com/Y1s8FKb.png" alt="Demo screenshot"/>
+<img height="600" src="https://i.imgur.com/2PPuvwH.gif" alt="Demo Gif"/>
 
 ## Install
 
@@ -44,7 +44,8 @@ npm install --save react-stories-components
 ## Demo
 
 The component responds to actions like tap on right side for next story, on left for previous and tap and hold for pause. Custom time duration for each story can be provided.
-See it in action here: https://mohitk05.github.io/react-stories-components/
+
+See it in action [here](https://davidramos-om.github.io/react-stories-components/)
 
 
 
@@ -85,6 +86,7 @@ Instead of simple string url, a comprehensive 'story object' can also be passed 
 | **New props on this fork**        | ⭐️ | 
 |`clickable`        | Optional. Allow the `content:({action,isPaused})` children elements to be clickeable. As a <b>side-effect</b> story won't pass to next-previous on touch right-leftt
 | `stopOnClick`     | Optional. If it true, the story will stop when the children elements are tapped/clicked
+| `onStoryClicked` | Optional. Fires when an element is/clicked tapped. params (currentId, story, e.target)
 
 ## Usage
 
@@ -403,6 +405,7 @@ In the JSX, `isPaused` is used to display the current play state.
 
  ```jsx 
  	 
+
 const StoryComponent = ({ action, isPaused }) => {
 	return (
 		<div style={{ ...contentStyle, background: 'Aquamarine', marginTop: '50%', color: '#16161d', height: '100%' }}>
@@ -456,6 +459,10 @@ const storiesList = [
 		clickable: true,
 		stopOnClick: true,
 		content: clickedComponentStory,
+		onStoryClicked: (id, st, target) => {
+			console.log('story clicked', id, st)
+			console.log('target', target)
+		}
 	},
 	{
 		content: ({ action, isPaused }) => {
@@ -472,7 +479,7 @@ const storiesList = [
 				<p>Or here, an image!</p>
 				<br />
 				<img style={image} src="https://images.unsplash.com/photo-1565506737357-af89222625ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"></img>
-				<h3>Perfect. But there's more! →</h3>
+				<h3>Perfect. But there's more!</h3>
 			</div>
 		}
 	},

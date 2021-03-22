@@ -104,6 +104,10 @@ const storiesList = [
 		clickable: true,
 		stopOnClick: true,
 		content: clickedComponentStory,
+		onStoryClicked: (id, st, target) => {
+			console.log('story clicked', id, st)
+			console.log('target', target)
+		}
 	},
 	{
 		content: ({ action, isPaused }) => {

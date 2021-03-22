@@ -17,7 +17,7 @@ export interface ReactInstaStoriesProps {
     }[];
     onAllStoriesEnd?: Function;
     onStoryStart?: Function;
-    onStoryEnd?: Function;
+    onStoryEnd?: Function; 
     keyboardNavigation?: boolean;
 }
 
@@ -37,7 +37,7 @@ export interface GlobalCtx {
     }[];
     onAllStoriesEnd?: Function;
     onStoryStart?: Function;
-    onStoryEnd?: Function;
+    onStoryEnd?: Function; 
     keyboardNavigation?: boolean;
 }
 
@@ -96,7 +96,8 @@ export interface Story {
     duration?: number;
     styles?: object;
     content?: Renderer;
-    originalContent?: Renderer
+    originalContent?: Renderer,
+    onStoryClicked?: Function
 }
 
 export interface Header {

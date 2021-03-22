@@ -5,7 +5,7 @@ import {
 } from '../interfaces';
 
 export const initialContext: { stories: Story[] } = {
-	stories: [],
+	stories: []
 };
 
 const StoriesContext = React.createContext<StoriesContextInterface>(
