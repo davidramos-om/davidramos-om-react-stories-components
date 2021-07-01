@@ -5,8 +5,8 @@ import WithHeader from './wrappers/withHeader';
 import WithSeeMore from './wrappers/withSeeMore';
 
 export const renderer: Renderer = ({ story, action, isPaused, config, messageHandler }) => {
-    const [loaded, setLoaded] = React.useState(false);
-    const [muted, setMuted] = React.useState(false);
+    const [ loaded, setLoaded ] = React.useState(false);
+    const [ muted, setMuted ] = React.useState(false);
     const { width, height, loader, storyStyles } = config;
 
     let computedStyles = {
@@ -24,7 +24,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                 vid.current.play().catch(() => { });
             }
         }
-    }, [isPaused]);
+    }, [ isPaused ]);
 
     const onWaiting = () => {
         action("pause", true);
@@ -61,7 +61,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                     onPlaying={onPlaying}
                     muted={muted}
                     autoPlay
-                    webkit-playsinline
+                    webkit-playsinline="true"
                 />
                 {!loaded && (
                     <div

@@ -1,15 +1,13 @@
 {
 	"name": "react-stories-components",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "A React component for Instagram like stories",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"build": "webpack --mode production",
 		"build:dev": "webpack --mode development",
-		"prestart": "webpack --mode development",
 		"start": "webpack --watch --mode development",
-		"example": "cd example && npm start",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"predeploy": "cd example && npm install && npm run build",
 		"buildall": "npm install && webpack --mode production && cd example && npm install && npm run build",

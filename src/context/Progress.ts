@@ -6,5 +6,6 @@ export default React.createContext<ProgressContext>({
     videoDuration: 0,
     bufferAction: false,
     pause: false,
+    automatic: true,
     next: () => { }
 })

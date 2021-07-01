@@ -1,59 +1,12 @@
-import './App.css';
-import React, { useState } from 'react';
-import Stories, { WithSeeMore } from 'react-stories-components'
-import { StoryNav } from './StoryNav';
 
-const image = {
-	display: 'block',
-	maxWidth: '100%',
-	borderRadius: 4,
-}
+ ## Example src
 
-const code = {
-	background: '#eee',
-	padding: '5px 10px',
-	borderRadius: '4px',
-	color: '#333',
-}
+ ```jsx 
 
-const contentStyle = {
-	background: 'salmon',
-	width: '100%',
-	padding: 20,
-	color: 'white'
-}
-
-const customSeeMore = {
-	textAlign: 'center',
-	cursor: 'pointer',
-	fontSize: 14,
-	bottom: 50,
-	position: 'relative'
-}
-
-const themeOrange = {
-	background: 'orange',
-	color: 'white',
-	boderColorButton: 'white'
-}
-
-export const contentStyle_NavStory = {
-	...themeOrange,
-	width: '100%',
-	height: '-webkit-fill-available',
-	padding: 10,
-	userSelect: 'none',
-}
-
-
-const App = ({ onAllStoriesEnd }) => {
-
-	const [ currentIndex, setCurrentIndex ] = useState(0);
+    const [ currentIndex, setCurrentIndex ] = useState(0);
 
 	const handleClose = () => {
-
 		alert("Close button nav clicked");
-
 		if (onAllStoriesEnd)
 			onAllStoriesEnd();
 	}
@@ -61,49 +14,18 @@ const App = ({ onAllStoriesEnd }) => {
 	const handleNext = () => {
 		if (currentIndex + 1 > 8)
 			return;
-
 		setCurrentIndex(currentIndex + 1);
 	}
 
 	const handlePrevious = () => {
 		if (currentIndex - 1 < 0)
 			return;
-
 		setCurrentIndex(currentIndex - 1);
 	}
 
+
 	return (
-		<div className="App">
-			<div className="left">
-				<h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-stories-components" target="_blank">react-stories-components</a></code></h2>
-				<p>Create Instagram like stories on the web using React</p>
-				<br />
-				<code ><span style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}>npm i react-stories-components</span></code>
-				<br />
-				<a href="https://github.com/davidramos-om/react-stories-components">Documentation</a>
-				<br />
-				<p>Fork from
-					<a
-						rel="noopener noreferrer"
-						href="https://github.com/mohitk05/react-insta-stories"
-						target="_blank"
-					> @mohitk05
-					</a>  with ♥ by
-					<a
-						rel="noopener noreferrer"
-						href="https://github.com/davidramos-om/react-stories-components"
-						target="_blank"
-					> @davidramos-om</a>
-				</p>
-				<br />
-				<div style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}><p>◀ Tap left for previous story</p>
-					<p>▶︎ Tap right for next story</p>
-					<p>◉ Press and hold to pause</p></div>
-				<br />
-				<p>Know more about me here: <a rel="noopener noreferrer" href="https://www.davidramos-om.com" target="_blank">davidramos-om.com</a></p>
-			</div>
-
-
+		<div className="App">			
 			<div className="stories">
 				<Stories
 					stories={generateStories(handleClose, handlePrevious, handleNext)}
@@ -129,10 +51,11 @@ const App = ({ onAllStoriesEnd }) => {
 					}}
 				/>
 			</div>
-
 		</div>
-	);
-}
+	);	
+ ```
+
+ ```jsx 
 
 const generateStories = (onClose, onPrevious, onNext) => {
 
@@ -366,4 +289,316 @@ const StoryComponent = ({ action, isPaused }) => {
 	);
 }
 
-export default App;
+ ```
+
+### StoryNav Component
+ ```jsx 
+ import React from 'react';
+
+export const StoryNav = ({ onPrevious, onClose, onNext }) => {
+
+    const handlePrevious = (e) => {
+        e.preventDefault();
+        if (onPrevious)
+            onPrevious();
+    }
+
+    const handleClose = (e) => {
+        e.preventDefault();
+        if (onClose)
+            onClose();
+    }
+
+    const handleNext = (e) => {
+        e.preventDefault();
+        if (onNext)
+            onNext();
+    }
+
+    return (
+        <div className="storyNavigationContainer">
+            <div className="storyNavigationTopLeft" onClick={handlePrevious} >
+                <a href="#" className="previous round" >&#8249;</a>
+            </div>
+
+            <div className="storyNavigationCenter" onClick={handleClose}>
+                <a href="#" className="previous round" >x</a>
+            </div>
+
+            <div className="storyNavigationTopRight" onClick={handleNext}>
+                <a href="#" className="next round" >&#8250;</a>
+            </div>
+        </div >
+    );
+}
+```
+
+### Styles
+ ```jsx 
+
+const image = {
+	display: 'block',
+	maxWidth: '100%',
+	borderRadius: 4,
+}
+
+const code = {
+	background: '#eee',
+	padding: '5px 10px',
+	borderRadius: '4px',
+	color: '#333',
+}
+
+const contentStyle = {
+	background: 'salmon',
+	width: '100%',
+	padding: 20,
+	color: 'white'
+}
+
+const customSeeMore = {
+	textAlign: 'center',
+	cursor: 'pointer',
+	fontSize: 14,
+	bottom: 50,
+	position: 'relative'
+}
+
+const themeOrange = {
+	background: 'orange',
+	color: 'white',
+	boderColorButton: 'white'
+}
+
+export const contentStyle_NavStory = {
+	...themeOrange,
+	width: '100%',
+	height: '-webkit-fill-available',
+	padding: 10,
+	userSelect: 'none',
+}
+ ```
+
+ ### CSS - Classes
+ ```css 
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+p {
+	margin: 0;
+}
+
+.App {
+	margin: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Karla', sans-serif;
+	height: 87vh;
+}
+
+.stories {
+	filter: drop-shadow(0 10px 20px #aaa);
+}
+
+.left {
+	display: flex;
+	flex-direction: column;
+	margin-right: 10rem;
+	justify-content: flex-start;
+	max-width: 400px;
+}
+
+.seeMore {
+	padding: 2rem;
+	color: #16161d;
+	background: white;
+	height: -webkit-fill-available;
+}
+
+.seeMore input,
+.seeMore textarea {
+	display: block;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 0.8rem;
+	margin-bottom: 0.7rem;
+	width: -webkit-fill-available;
+	transition: filter 300ms ease-in-out;
+	font-size: 0.8rem;
+	font-family: inherit;
+}
+
+.seeMore input:focus,
+.seeMore textarea:focus {
+	outline: none;
+	filter: drop-shadow(0 2px 5px #ccc);
+}
+
+.seeMore button {
+	display: block;
+	margin: auto;
+	margin-top: 1rem;
+	background: #16161d;
+	filter: drop-shadow(0 3px 5px #ccc);
+	color: snow;
+	border-radius: 5px;
+	border: none;
+	width: 200px;
+	padding: 0.5rem;
+	font-size: 1rem;
+	transition: filter 300ms ease-in-out;
+}
+
+.seeMore button:focus {
+	outline: none;
+}
+
+.seeMore button:hover {
+	cursor: pointer;
+	filter: drop-shadow(0 5px 5px #aaa);
+}
+
+.seeMore a {
+	display: block;
+	font-size: 0.8rem;
+	width: fit-content;
+	margin: auto;
+	margin-top: 2rem;
+}
+
+code {
+	font-family: 'Source Code Pro', monospace;
+}
+
+.updates {
+	max-height: 30vh;
+	overflow: scroll;
+}
+
+.updates p {
+	margin: 2px;
+}
+
+@media only screen and (max-width: 768px) {
+	.App {
+		flex-direction: column;
+		justify-content: flex-start;
+		height: auto;
+	}
+
+	.left {
+		max-width: 100%;
+		margin: 0;
+		margin-bottom: 2rem;
+	}
+}
+
+.main{
+	width: 100%;
+  }
+ 
+  .button-one, .button-two, .button-three{
+	text-align: center;
+	cursor: pointer;
+	font-size:24px; 
+  }
+
+  .button-three {
+    position: relative;
+    background-color: #f39c12;
+    border: none;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.button-three:hover{
+   background:#fff;
+   box-shadow:0px 2px 10px 5px #97B1BF;
+   color:#000;
+}
+
+.button-three:after {
+    content: "";
+    background: #f1c40f;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.button-three:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}  
+
+.storyNavigationContainer {
+	position: relative;
+	text-align: center;
+	color: white;
+}
+
+.storyNavigationTopLeft {
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	left: 0px;
+}
+
+.storyNavigationCenter {
+	position: absolute; 
+	cursor: pointer;
+	top: 30px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.storyNavigationTopRight {
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 0px;
+}
+
+a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 8px 16px;
+  }
+  
+  a:hover {
+	background-color: #ddd;
+	color: black;
+  }
+  
+  .previous {
+	background-color: #f1f1f1;
+	color: black;
+  }
+  
+  .next {
+	background-color: #f1f1f1;
+	color: black;
+  }
+  
+  .round {
+	border-radius: 50%;
+  } 
+ ```
+## License
+
+MIT © [davidramos-om](https://github.com/davidramos-om)

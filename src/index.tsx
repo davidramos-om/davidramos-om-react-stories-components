@@ -18,10 +18,15 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         storyStyles: props.storyStyles,
         loop: props.loop,
         defaultInterval: props.defaultInterval,
+        automatic: props.automatic,
+        // useNavigationBar: props.useNavigationBar,
+        // navigationNode: props.navigationNode,
+
         isPaused: props.isPaused,
         currentIndex: props.currentIndex,
         onStoryStart: props.onStoryStart,
         onStoryEnd: props.onStoryEnd,
+        onStoryChange: props.onStoryChange,
         onAllStoriesEnd: props.onAllStoriesEnd,
         keyboardNavigation: props.keyboardNavigation
     }
@@ -58,7 +63,10 @@ const generateStories = (stories: Story[], renderers: { renderer: Renderer, test
 ReactInstaStories.defaultProps = {
     width: 360,
     height: 640,
-    defaultInterval: 4000
+    defaultInterval: 4000,
+    automatic: true,
+    // useNavigationBar: false,
+    // navigationNode: null,
 }
 
 export const WithHeader = withHeader;

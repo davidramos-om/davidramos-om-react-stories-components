@@ -6,37 +6,47 @@ import GlobalContext from './../context/Global'
 import StoriesContext from './../context/Stories'
 
 export default () => {
-    const [count, setCount] = useState<number>(0)
-    const { currentId, next, videoDuration, pause } = useContext<ProgressContext>(ProgressCtx)
+    const [ count, setCount ] = useState<number>(0)
+    const { currentId, next, videoDuration, pause, automatic } = useContext<ProgressContext>(ProgressCtx)
     const { defaultInterval, onStoryEnd, onStoryStart, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
         setCount(0)
-    }, [currentId, stories])
+    }, [ currentId, stories ])
 
     useEffect(() => {
+
         if (!pause) {
-            animationFrameId.current = requestAnimationFrame(incrementCount)
+
+            if (automatic) {
+                animationFrameId.current = requestAnimationFrame(incrementCount)
+            }
         }
+
         return () => {
             cancelAnimationFrame(animationFrameId.current)
         }
-    }, [currentId, pause])
+
+    }, [ currentId, pause, automatic ])
 
     let animationFrameId = useRef<number>()
 
     let countCopy = count;
     const incrementCount = () => {
-        if (countCopy === 0) storyStartCallback()
+        if (countCopy === 0)
+            storyStartCallback();
+
         setCount((count: number) => {
             const interval = getCurrentInterval()
             countCopy = count + (100 / ((interval / 1000) * 60))
             return count + (100 / ((interval / 1000) * 60))
         })
+
         if (countCopy < 100) {
             animationFrameId.current = requestAnimationFrame(incrementCount)
-        } else {
+        }
+        else {
             storyEndCallback()
             if (currentId === stories.length - 1) {
                 allStoriesEndCallback()
@@ -47,11 +57,11 @@ export default () => {
     }
 
     const storyStartCallback = () => {
-        onStoryStart && onStoryStart(currentId, stories[currentId])
+        onStoryStart && onStoryStart(currentId, stories[ currentId ])
     }
 
     const storyEndCallback = () => {
-        onStoryEnd && onStoryEnd(currentId, stories[currentId])
+        onStoryEnd && onStoryEnd(currentId, stories[ currentId ])
     }
 
     const allStoriesEndCallback = () => {
@@ -59,10 +69,18 @@ export default () => {
     }
 
     const getCurrentInterval = () => {
-        if (stories[currentId].type === 'video') return videoDuration
-        if (typeof stories[currentId].duration === 'number') return stories[currentId].duration
-        return defaultInterval
+        let duration = defaultInterval;
+        if (stories[ currentId ].type === 'video')
+            duration = videoDuration;
+
+        if (typeof stories[ currentId ].duration === 'number')
+            duration = stories[ currentId ].duration
+
+        return duration
     }
+
+    if (stories[ currentId ].hideStoryProgress)
+        return null;
 
     return (
         <div style={styles.progressArr}>

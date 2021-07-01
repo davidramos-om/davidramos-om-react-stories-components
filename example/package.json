@@ -1,10 +1,9 @@
 {
 	"name": "react-stories-components-example",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"prestart": "webpack --mode development",
 		"start": "webpack-dev-server --open --hot",
 		"test": "echo \"No test specified\" && exit 0",
 		"build": "webpack --mode production",

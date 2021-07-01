@@ -15,7 +15,7 @@ export default function () {
 
     let mousedownId = useRef<any>();
 
-    const { width, height, loop, currentIndex, isPaused, keyboardNavigation } = useContext<GlobalCtx>(GlobalContext);
+    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, automatic, onStoryChange } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
@@ -35,6 +35,16 @@ export default function () {
             setPause(isPaused)
         }
     }, [ isPaused ])
+
+    useEffect(() => {
+        if (onStoryChange) {
+            const prev = currentId <= 0 ? 0 : currentId - 1;
+            const curr = currentId;
+            const next = currentId + 1;
+            onStoryChange(prev, curr, next);
+        }
+
+    }, [ currentId ])
 
     useEffect(() => {
 
@@ -69,12 +79,10 @@ export default function () {
     }
 
     const previous = () => {
-
         setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
     const next = () => {
-
         if (loop) {
             updateNextStoryIdForLoop()
         } else {
@@ -116,21 +124,16 @@ export default function () {
                 }, 200)
             }
         }
-
     }
 
     const handleContainerDebounce = (e: React.MouseEvent | React.TouchEvent) => {
-
         const story = stories[ currentId ];
-
         if (!story.clickable)
             return;
-
         debouncePause(e);
     }
 
     const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
-
         mousedownId.current = setTimeout(() => {
             toggleState('pause')
         }, 200)
@@ -163,10 +166,12 @@ export default function () {
                 videoDuration: videoDuration,
                 currentId,
                 pause,
-                next
+                next,
+                automatic
             }}>
                 <ProgressArray />
             </ProgressContext.Provider>
+
             <Story
                 action={toggleState}
                 bufferAction={bufferAction}
@@ -175,7 +180,7 @@ export default function () {
                 getVideoDuration={getVideoDuration}
             />
 
-            {!stories[ currentId ].clickable && (
+            {!stories[ currentId ].clickable && !stories[ currentId ].preventChangeSideTapped && (
                 <div style={styles.overlay}>
                     <div id="left-side-story"
                         style={{ width: '50%', zIndex: 999 }}

@@ -9,6 +9,11 @@ export interface ReactInstaStoriesProps {
     storyStyles?: Object;
     loop?: boolean;
     defaultInterval?: number;
+
+    automatic?: boolean;
+    // useNavigationBar?: boolean,
+    // navigationNode: JSX.Element,
+
     isPaused?: boolean;
     currentIndex?: number;
     renderers?: {
@@ -17,7 +22,8 @@ export interface ReactInstaStoriesProps {
     }[];
     onAllStoriesEnd?: Function;
     onStoryStart?: Function;
-    onStoryEnd?: Function; 
+    onStoryEnd?: Function;
+    onStoryChange?: Function;
     keyboardNavigation?: boolean;
 }
 
@@ -29,6 +35,11 @@ export interface GlobalCtx {
     storyStyles?: Object;
     loop?: boolean;
     defaultInterval?: number;
+
+    automatic?: boolean;
+    // useNavigationBar?: boolean,
+    // navigationNode: JSX.Element,
+
     isPaused?: boolean;
     currentIndex?: number;
     renderers?: {
@@ -37,7 +48,8 @@ export interface GlobalCtx {
     }[];
     onAllStoriesEnd?: Function;
     onStoryStart?: Function;
-    onStoryEnd?: Function; 
+    onStoryEnd?: Function;
+    onStoryChange?: Function;
     keyboardNavigation?: boolean;
 }
 
@@ -88,6 +100,8 @@ export interface StoryState {
 export interface Story {
     url?: string;
     clickable?: boolean,
+    hideStoryProgress?: boolean,
+    preventChangeSideTapped?: boolean,
     stopOnClick?: boolean,
     seeMore?: Function;
     seeMoreCollapsed?: React.ComponentType<{ toggleMore: (show: boolean) => void, action: Action }>;
@@ -130,6 +144,8 @@ export interface ProgressWrapperProps {
     children: any;
     width: number;
     pause: boolean;
+    currentId: number;
+    automatic: boolean;
     bufferAction: boolean
 }
 
@@ -142,5 +158,6 @@ export interface ProgressContext {
     videoDuration: number;
     bufferAction: boolean;
     pause: boolean;
+    automatic: boolean;
     next: Function
 }
