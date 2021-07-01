@@ -30,9 +30,6 @@ This project is a fork from [mohitk05's stories](https://github.com/mohitk05/rea
 
 Please keep updated on the original one.
 
-
-<img height="600" src="https://i.imgur.com/Qnjlj9H.gif" alt="Demo Gif"/>
-
 ## Install
 
 ```bash
