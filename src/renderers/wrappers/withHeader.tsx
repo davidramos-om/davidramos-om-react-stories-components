@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '../../interfaces';
 import Header from "./../../components/Header";
 
-const withHeader: React.FC<{ story: Story, globalHeader: Function }> = ({ story, globalHeader, children }) => {
+const withHeader: React.FC<{ story: Story, globalHeader: Function, children: React.ReactNode }> = ({ story, globalHeader, children }) => {
     return <>
         {children}
         {story.header && (

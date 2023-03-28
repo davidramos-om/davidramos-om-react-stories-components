@@ -1,10 +1,11 @@
-import React, { ComponentType, useState } from 'react';
+import React, { useState } from 'react';
 import { Action, SeeMoreProps, Story } from '../../interfaces';
 import SeeMore from "./../../components/SeeMore";
 
 const withSeeMore: React.FC<{
     story: Story,
     action: Action,
+    children: React.ReactNode,
     customCollapsed?: SeeMoreProps["customCollapsed"]
 }> = ({ story, action, customCollapsed, children }) => {
     const [showMore, setShowMore] = useState(false);
